@@ -4,8 +4,8 @@
 
 ## Libs
 
-* OpenCV with Gstreamer
-* OSCPack
+* **`opencv-gst`**: OpenCV with Gstreamer
+* **`oscpack`**: OSCPack
 
 ## Install
 
