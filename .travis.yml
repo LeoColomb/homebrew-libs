@@ -1,0 +1,29 @@
+language: ruby
+
+sudo: true
+
+matrix:
+  include:
+    - os: osx
+      osx_image: xcode9.2
+      rvm: system
+  fast_finish: true
+
+branches:
+  only:
+    - master
+
+cache:
+  directories:
+    - /usr/local/Homebrew/Library/Homebrew/vendor/bundle
+
+install: true # skip install step
+
+before_script:
+  - . ci/travis/before_script.sh
+
+script:
+  - . ci/travis/script.sh
+
+notifications:
+  email: false
