@@ -3,7 +3,7 @@ class OpencvGst < Formula
   homepage "https://opencv.org/"
   url "https://github.com/opencv/opencv/archive/3.4.1.tar.gz"
   sha256 "f1b87684d75496a1054405ae3ee0b6573acaf3dad39eaf4f1d66fdd7e03dc852"
-  revision 2
+  revision 5
 
   conflicts_with "opencv", :because => "same library"
 
@@ -54,7 +54,9 @@ class OpencvGst < Formula
       -DBUILD_TESTS=OFF
       -DBUILD_TIFF=OFF
       -DBUILD_ZLIB=OFF
+      -DBUILD_opencv_hdf=OFF
       -DBUILD_opencv_java=OFF
+      -DBUILD_opencv_text=OFF
       -DOPENCV_ENABLE_NONFREE=ON
       -DOPENCV_EXTRA_MODULES_PATH=#{buildpath}/opencv_contrib/modules
       -DWITH_1394=OFF
@@ -88,6 +90,11 @@ class OpencvGst < Formula
       system "cmake", "..", *args
       system "make"
       system "make", "install"
+      system "make", "clean"
+      system "cmake", "..", "-DBUILD_SHARED_LIBS=OFF", *args
+      system "make"
+      lib.install Dir["lib/*.a"]
+      lib.install Dir["3rdparty/**/*.a"]
     end
   end
 
